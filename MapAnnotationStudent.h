@@ -18,5 +18,6 @@
 @property (nonatomic, copy, nullable) NSString *subtitle;
 
 
-@property (nonatomic, assign) StudentSexType sex;
+@property (nonatomic,strong,nullable) Student *student;
+@property (nonatomic, assign) StudentGenderType gender;
 @end

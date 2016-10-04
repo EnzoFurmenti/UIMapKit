@@ -14,9 +14,11 @@
 		965770121D9F942300ACF4EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965770101D9F942300ACF4EA /* Main.storyboard */; };
 		965770141D9F942300ACF4EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965770131D9F942300ACF4EA /* Assets.xcassets */; };
 		965770171D9F942300ACF4EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965770151D9F942300ACF4EA /* LaunchScreen.storyboard */; };
+		965C12C41DA3C2410023EBA4 /* InfoStudentPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 965C12C31DA3C2410023EBA4 /* InfoStudentPopover.m */; };
 		96B994571DA2540200B12586 /* MapAnnotationStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B994561DA2540200B12586 /* MapAnnotationStudent.m */; };
 		96B994621DA3A2BB00B12586 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B994601DA3A2BB00B12586 /* female.png */; };
 		96B994631DA3A2BB00B12586 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B994611DA3A2BB00B12586 /* male.png */; };
+		96F8415D1DA3E31F001CC085 /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F8415C1DA3E31F001CC085 /* UIView+MKAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +34,14 @@
 		965770131D9F942300ACF4EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		965770161D9F942300ACF4EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		965770181D9F942300ACF4EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		965C12C21DA3C2410023EBA4 /* InfoStudentPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoStudentPopover.h; sourceTree = "<group>"; };
+		965C12C31DA3C2410023EBA4 /* InfoStudentPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoStudentPopover.m; sourceTree = "<group>"; };
 		96B994551DA2540200B12586 /* MapAnnotationStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationStudent.h; sourceTree = "<group>"; };
 		96B994561DA2540200B12586 /* MapAnnotationStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationStudent.m; sourceTree = "<group>"; };
 		96B994601DA3A2BB00B12586 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		96B994611DA3A2BB00B12586 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
+		96F8415B1DA3E31F001CC085 /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
+		96F8415C1DA3E31F001CC085 /* UIView+MKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MKAnnotationView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,18 +84,31 @@
 		965770071D9F942300ACF4EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				965C12C51DA3C2490023EBA4 /* Popovers */,
 				96B9945F1DA3A2BB00B12586 /* image */,
 				96B994641DA3BF9F00B12586 /* interFace */,
 				96B994541DA2530900B12586 /* MapAnnotation */,
 				965770131D9F942300ACF4EA /* Assets.xcassets */,
 				9657700A1D9F942300ACF4EA /* AppDelegate.h */,
 				9657700B1D9F942300ACF4EA /* AppDelegate.m */,
+				96F8415B1DA3E31F001CC085 /* UIView+MKAnnotationView.h */,
+				96F8415C1DA3E31F001CC085 /* UIView+MKAnnotationView.m */,
 				963F66DB1DA226F1003D2C39 /* Student.h */,
 				963F66DC1DA226F1003D2C39 /* Student.m */,
 				965770181D9F942300ACF4EA /* Info.plist */,
 				965770081D9F942300ACF4EA /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		965C12C51DA3C2490023EBA4 /* Popovers */ = {
+			isa = PBXGroup;
+			children = (
+				965C12C21DA3C2410023EBA4 /* InfoStudentPopover.h */,
+				965C12C31DA3C2410023EBA4 /* InfoStudentPopover.m */,
+			);
+			name = Popovers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		96B994541DA2530900B12586 /* MapAnnotation */ = {
@@ -198,7 +217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F8415D1DA3E31F001CC085 /* UIView+MKAnnotationView.m in Sources */,
 				9657700F1D9F942300ACF4EA /* ViewController.m in Sources */,
+				965C12C41DA3C2410023EBA4 /* InfoStudentPopover.m in Sources */,
 				9657700C1D9F942300ACF4EA /* AppDelegate.m in Sources */,
 				965770091D9F942300ACF4EA /* main.m in Sources */,
 				963F66DD1DA226F1003D2C39 /* Student.m in Sources */,

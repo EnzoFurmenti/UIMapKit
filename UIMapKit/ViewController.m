@@ -10,7 +10,9 @@
 
 #import "ViewController.h"
 #import "Student.h"
+#import "InfoStudentPopover.h"
 #import "MapAnnotationStudent.h"
+#import "UIView+MKAnnotationView.h"
 @interface ViewController ()<MKMapViewDelegate,CLLocationManagerDelegate>
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
@@ -18,6 +20,10 @@
 @property (strong,nonatomic) NSArray *arrayStudents;
 
 @property (strong,nonatomic) NSArray *arrayAnnotationStudents;
+
+@property (nonatomic,strong)  CLGeocoder *geoCoder;
+
+@property (nonatomic,strong) InfoStudentPopover *infoStudentPC;
 
 
 @end
@@ -31,10 +37,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UIBarButtonItem *addAllStudent = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAllStudent:)];
-    //self.navigationItem.rightBarButtonItem = addAllStudent;
+
+    
     UIBarButtonItem *showAllStudent = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showAllStudent:)];
+    
     self.navigationItem.rightBarButtonItems = @[showAllStudent,addAllStudent];
+    
+    self.geoCoder = [[CLGeocoder alloc]init];
     [self startLocation];
     
  }
@@ -72,7 +83,8 @@
             annotationStudent.title = [NSString stringWithFormat:@"%@ %@",currentStudent.firstName,currentStudent.lastName];
             annotationStudent.subtitle = [self stringFromDate:currentStudent.dayOfBirth];
             annotationStudent.coordinate = currentStudent.coordStudent;
-            annotationStudent.sex = currentStudent.sex;
+            annotationStudent.gender = currentStudent.gender;
+            annotationStudent.student = currentStudent;
             [mArrayAnnotationStud addObject:annotationStudent];
         }
         _arrayAnnotationStudents = [NSArray arrayWithArray:mArrayAnnotationStud];
@@ -101,6 +113,98 @@
                         edgePadding:UIEdgeInsetsMake(50.f,50.f,50.F,50.f) animated:YES];
 }
 
+-(void)actionInfo:(UIButton*)button{
+    MKAnnotationView *annotationView = [button superAnnotationView];
+    if(annotationView)
+    {
+        CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+        CLLocation *location = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+        __block CLPlacemark *placeMark;
+        [self.geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+            if(error)
+            {
+                if([placemarks count] == 0)
+                {
+                    NSLog(@"no placeMark");
+                }
+                else
+                {
+                    NSLog(@"%@",[error localizedDescription]);
+                }
+            }
+            else
+            {
+                placeMark = [placemarks firstObject];
+                NSString *message =  [self createAdressFromPlacemark:placeMark];
+                
+                
+                self.infoStudentPC = [self.storyboard instantiateViewControllerWithIdentifier:@"InfoStudentPopover"];
+                self.infoStudentPC.modalPresentationStyle = UIModalPresentationPopover;
+                [self presentViewController:self.infoStudentPC animated:YES completion:nil];
+                MapAnnotationStudent *mapAnnotationStudent;
+                if([annotationView.annotation isKindOfClass:[MapAnnotationStudent class]])
+                {
+                    mapAnnotationStudent = (MapAnnotationStudent*)annotationView.annotation;
+                
+                    self.infoStudentPC.firstName.text = mapAnnotationStudent.student.firstName;
+                    self.infoStudentPC.lastName.text = mapAnnotationStudent.student.lastName;
+        
+
+                    if(mapAnnotationStudent.student.gender == StudentFemale)
+                    {
+                        [self.infoStudentPC.genderControl setEnabled:NO forSegmentAtIndex:StudentFemale];
+                        self.infoStudentPC.genderControl.selectedSegmentIndex = StudentFemale;
+                    }
+                    else
+                    {
+                        [self.infoStudentPC.genderControl setEnabled:NO forSegmentAtIndex:StudentFemale];
+                        self.infoStudentPC.genderControl.selectedSegmentIndex = StudentMale;
+                    }
+                    
+                    self.infoStudentPC.dayOfBirth.text = [self stringFromDate:mapAnnotationStudent.student.dayOfBirth];
+                    self.infoStudentPC.address.text = message;
+                UIPopoverPresentationController *popoverPresentationC = [self.infoStudentPC popoverPresentationController];
+                popoverPresentationC.permittedArrowDirections = UIPopoverArrowDirectionDown;
+                popoverPresentationC.sourceView = button;
+                }
+            }
+        }];
+    }
+    
+}
+
+-(NSString*)createAdressFromPlacemark:(CLPlacemark*)placeMark{
+    
+    NSString *nullMessage = @"нет";
+    NSString *message =  [NSString stringWithFormat:@"Название метки %@\n"
+                                                    "Улица %@\n"
+                                                    "Улица доп. %@\n"
+                                                    "Город %@\n"
+                                                    "Город доп. %@\n"
+                                                    "Область %@\n"
+                                                    "Область доп.%@\n"
+                                                    "Индекс %@\n"
+                                                    "Страна абр %@\n"
+                                                    "Страна %@\n"
+                                                    "Наименование моря %@\n"
+                                                    "Океан %@\n"
+                                                    "Достопримечательности %@\n",
+                          placeMark.name                    ? placeMark.name                    : nullMessage,
+                          placeMark.thoroughfare            ? placeMark.thoroughfare            : nullMessage,
+                          placeMark.subThoroughfare         ? placeMark.subThoroughfare         : nullMessage,
+                          placeMark.locality                ? placeMark.locality                : nullMessage,
+                          placeMark.subLocality             ? placeMark.subLocality             : nullMessage,
+                          placeMark.administrativeArea      ? placeMark.administrativeArea      : nullMessage,
+                          placeMark.subAdministrativeArea   ? placeMark.subAdministrativeArea   : nullMessage,
+                          placeMark.postalCode              ? placeMark.postalCode              : nullMessage,
+                          placeMark.ISOcountryCode          ? placeMark.ISOcountryCode          : nullMessage,
+                          placeMark.country                 ? placeMark.country                 : nullMessage,
+                          placeMark.inlandWater             ? placeMark.inlandWater             : nullMessage,
+                          placeMark.ocean                   ? placeMark.ocean                   : nullMessage,
+                          placeMark.areasOfInterest         ? placeMark.areasOfInterest         : nullMessage];
+    return message;
+}
+
 #pragma mark - MKMapViewDelegate
 
 - (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation{
@@ -120,14 +224,20 @@
         if([annotation isKindOfClass:[MapAnnotationStudent class]])
         {
             MapAnnotationStudent *mapAnnotationStud = (MapAnnotationStudent*)annotation;
-            if(mapAnnotationStud.sex == StudentMale)
+            if(mapAnnotationStud.gender == StudentMale)
             {
                 isFemale = NO;
             }
-           // NSLog(@" %d %@",isFemale ,isFemale ? @"female.png" : @"male.png");
             UIImage *image = [UIImage imageNamed:isFemale ? @"female.png" : @"male.png"];
             annotationView.image = image;
         }
+        
+        UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [infoButton addTarget:self action:@selector(actionInfo:) forControlEvents:UIControlEventTouchDown];
+        annotationView.rightCalloutAccessoryView = infoButton;
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithImage:annotationView.image];
+        annotationView.leftCalloutAccessoryView = imageView;
         annotationView.draggable = YES;
         annotationView.canShowCallout = YES;
     }
