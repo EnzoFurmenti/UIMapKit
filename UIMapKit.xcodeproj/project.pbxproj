@@ -15,12 +15,13 @@
 		965770141D9F942300ACF4EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965770131D9F942300ACF4EA /* Assets.xcassets */; };
 		965770171D9F942300ACF4EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965770151D9F942300ACF4EA /* LaunchScreen.storyboard */; };
 		96B994571DA2540200B12586 /* MapAnnotationStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B994561DA2540200B12586 /* MapAnnotationStudent.m */; };
+		96B994621DA3A2BB00B12586 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B994601DA3A2BB00B12586 /* female.png */; };
+		96B994631DA3A2BB00B12586 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B994611DA3A2BB00B12586 /* male.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		963F66DB1DA226F1003D2C39 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		963F66DC1DA226F1003D2C39 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
-		963F66E21DA22A2C003D2C39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		965770041D9F942300ACF4EA /* UIMapKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIMapKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965770081D9F942300ACF4EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9657700A1D9F942300ACF4EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -33,6 +34,8 @@
 		965770181D9F942300ACF4EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96B994551DA2540200B12586 /* MapAnnotationStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationStudent.h; sourceTree = "<group>"; };
 		96B994561DA2540200B12586 /* MapAnnotationStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationStudent.m; sourceTree = "<group>"; };
+		96B994601DA3A2BB00B12586 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
+		96B994611DA3A2BB00B12586 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,8 +52,6 @@
 		96576FFB1D9F942300ACF4EA = {
 			isa = PBXGroup;
 			children = (
-				96B994541DA2530900B12586 /* MapAnnotation */,
-				963F66E21DA22A2C003D2C39 /* MapKit.framework */,
 				965770061D9F942300ACF4EA /* UIMapKit */,
 				965770051D9F942300ACF4EA /* Products */,
 			);
@@ -67,16 +68,8 @@
 		965770061D9F942300ACF4EA /* UIMapKit */ = {
 			isa = PBXGroup;
 			children = (
-				9657700A1D9F942300ACF4EA /* AppDelegate.h */,
-				9657700B1D9F942300ACF4EA /* AppDelegate.m */,
 				9657700D1D9F942300ACF4EA /* ViewController.h */,
 				9657700E1D9F942300ACF4EA /* ViewController.m */,
-				963F66DB1DA226F1003D2C39 /* Student.h */,
-				963F66DC1DA226F1003D2C39 /* Student.m */,
-				965770101D9F942300ACF4EA /* Main.storyboard */,
-				965770131D9F942300ACF4EA /* Assets.xcassets */,
-				965770151D9F942300ACF4EA /* LaunchScreen.storyboard */,
-				965770181D9F942300ACF4EA /* Info.plist */,
 				965770071D9F942300ACF4EA /* Supporting Files */,
 			);
 			path = UIMapKit;
@@ -85,6 +78,15 @@
 		965770071D9F942300ACF4EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				96B9945F1DA3A2BB00B12586 /* image */,
+				96B994641DA3BF9F00B12586 /* interFace */,
+				96B994541DA2530900B12586 /* MapAnnotation */,
+				965770131D9F942300ACF4EA /* Assets.xcassets */,
+				9657700A1D9F942300ACF4EA /* AppDelegate.h */,
+				9657700B1D9F942300ACF4EA /* AppDelegate.m */,
+				963F66DB1DA226F1003D2C39 /* Student.h */,
+				963F66DC1DA226F1003D2C39 /* Student.m */,
+				965770181D9F942300ACF4EA /* Info.plist */,
 				965770081D9F942300ACF4EA /* main.m */,
 			);
 			name = "Supporting Files";
@@ -97,6 +99,25 @@
 				96B994561DA2540200B12586 /* MapAnnotationStudent.m */,
 			);
 			name = MapAnnotation;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		96B9945F1DA3A2BB00B12586 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				96B994601DA3A2BB00B12586 /* female.png */,
+				96B994611DA3A2BB00B12586 /* male.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		96B994641DA3BF9F00B12586 /* interFace */ = {
+			isa = PBXGroup;
+			children = (
+				965770101D9F942300ACF4EA /* Main.storyboard */,
+				965770151D9F942300ACF4EA /* LaunchScreen.storyboard */,
+			);
+			name = interFace;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,8 +184,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				965770171D9F942300ACF4EA /* LaunchScreen.storyboard in Resources */,
+				96B994631DA3A2BB00B12586 /* male.png in Resources */,
 				965770141D9F942300ACF4EA /* Assets.xcassets in Resources */,
 				965770121D9F942300ACF4EA /* Main.storyboard in Resources */,
+				96B994621DA3A2BB00B12586 /* female.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

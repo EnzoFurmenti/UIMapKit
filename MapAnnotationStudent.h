@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MKAnnotation.h>
+#import "Student.h"
 
 @interface MapAnnotationStudent : NSObject<MKAnnotation>
 
@@ -16,4 +17,6 @@
 @property (nonatomic, copy, nullable) NSString *title;
 @property (nonatomic, copy, nullable) NSString *subtitle;
 
+
+@property (nonatomic, assign) StudentSexType sex;
 @end

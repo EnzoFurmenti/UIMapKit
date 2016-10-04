@@ -31,7 +31,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem *addAllStudent = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAllStudent:)];
+    //self.navigationItem.rightBarButtonItem = addAllStudent;
+    UIBarButtonItem *showAllStudent = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showAllStudent:)];
+    self.navigationItem.rightBarButtonItems = @[showAllStudent,addAllStudent];
     [self startLocation];
+    
  }
 
 - (void)didReceiveMemoryWarning {
@@ -67,6 +72,7 @@
             annotationStudent.title = [NSString stringWithFormat:@"%@ %@",currentStudent.firstName,currentStudent.lastName];
             annotationStudent.subtitle = [self stringFromDate:currentStudent.dayOfBirth];
             annotationStudent.coordinate = currentStudent.coordStudent;
+            annotationStudent.sex = currentStudent.sex;
             [mArrayAnnotationStud addObject:annotationStudent];
         }
         _arrayAnnotationStudents = [NSArray arrayWithArray:mArrayAnnotationStud];
@@ -74,6 +80,26 @@
     return _arrayAnnotationStudents;
 }
 
+#pragma mark - action
+
+-(void)addAllStudent:(UIBarButtonItem*)barButton{
+    [self.mapView addAnnotations:self.arrayAnnotationStudents];
+}
+
+-(void)showAllStudent:(UIBarButtonItem*)barButton{
+    MKMapRect zoomRect = MKMapRectNull;
+    static double delta = 20000;
+    for (id<MKAnnotation>annotation in self.arrayAnnotationStudents)
+    {
+        CLLocationCoordinate2D coord = annotation.coordinate;
+        MKMapPoint center = MKMapPointForCoordinate(coord);
+        MKMapRect rect = MKMapRectMake(center.x - delta, center.y - delta, delta*2, delta*2);
+        zoomRect = MKMapRectUnion(zoomRect, rect);
+    }
+    zoomRect = [self.mapView mapRectThatFits:zoomRect];
+    [self.mapView setVisibleMapRect:zoomRect
+                        edgePadding:UIEdgeInsetsMake(50.f,50.f,50.F,50.f) animated:YES];
+}
 
 #pragma mark - MKMapViewDelegate
 
@@ -85,21 +111,69 @@
     
     static NSString *identifier = @"MapAnnotationStudent";
     
-    MKPinAnnotationView *pinAnnotation = (MKPinAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if(!pinAnnotation)
+    MKAnnotationView *annotationView = (MKAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if(!annotationView)
     {
-        pinAnnotation = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
-        pinAnnotation.pinTintColor = [UIColor greenColor];
-        pinAnnotation.animatesDrop = YES;
-        pinAnnotation.canShowCallout = YES;
+        annotationView = [[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
+        
+        BOOL isFemale = YES;
+        if([annotation isKindOfClass:[MapAnnotationStudent class]])
+        {
+            MapAnnotationStudent *mapAnnotationStud = (MapAnnotationStudent*)annotation;
+            if(mapAnnotationStud.sex == StudentMale)
+            {
+                isFemale = NO;
+            }
+           // NSLog(@" %d %@",isFemale ,isFemale ? @"female.png" : @"male.png");
+            UIImage *image = [UIImage imageNamed:isFemale ? @"female.png" : @"male.png"];
+            annotationView.image = image;
+        }
+        annotationView.draggable = YES;
+        annotationView.canShowCallout = YES;
     }
     else
     {
-        pinAnnotation.annotation = annotation;
+        annotationView.annotation = annotation;
     }
-    return pinAnnotation;
+    return annotationView;
 }
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState
+   fromOldState:(MKAnnotationViewDragState)oldState{
+    
+    if (newState == MKAnnotationViewDragStateStarting) {
+        [UIView animateWithDuration:0.3f
+                              delay:0.f
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                                view.transform = CGAffineTransformMakeScale(2.f, 2.f);
+                         }completion:^(BOOL finished) {
+                             [view setDragState:MKAnnotationViewDragStateDragging animated:YES];
+        }];
+    }
+    else if (newState == MKAnnotationViewDragStateEnding || newState == MKAnnotationViewDragStateCanceling) {
+        
+        [UIView animateWithDuration:0.3f delay:0.f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                                    view.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                        }completion:^(BOOL finished) {
+                            [view setDragState:MKAnnotationViewDragStateNone animated:YES];
+        }];
+    }
+}
+
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views{
+    
+    for (MKAnnotationView *annotationView in views)
+    {
+        CGRect finishFrame = annotationView.frame;
+        annotationView.frame = CGRectOffset(finishFrame, 100, -300);
+        [UIView animateWithDuration:0.5
+                         animations:^{ annotationView.frame = finishFrame; }];
+    }
+}
 
 #pragma mark - date metods
 
