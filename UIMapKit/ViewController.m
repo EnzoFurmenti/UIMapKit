@@ -126,6 +126,7 @@
                 if([placemarks count] == 0)
                 {
                     NSLog(@"no placeMark");
+                    NSLog(@"%@",[error localizedDescription]);
                 }
                 else
                 {
@@ -152,7 +153,7 @@
 
                     if(mapAnnotationStudent.student.gender == StudentFemale)
                     {
-                        [self.infoStudentPC.genderControl setEnabled:NO forSegmentAtIndex:StudentFemale];
+                        [self.infoStudentPC.genderControl setEnabled:NO forSegmentAtIndex:StudentMale];
                         self.infoStudentPC.genderControl.selectedSegmentIndex = StudentFemale;
                     }
                     else

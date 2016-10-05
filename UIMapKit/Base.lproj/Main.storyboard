@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXi-69-2Mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="610" y="359"/>
+            <point key="canvasLocation" x="541" y="359"/>
         </scene>
         <!--Данные о студенте-->
         <scene sceneID="ezr-36-X1l">
