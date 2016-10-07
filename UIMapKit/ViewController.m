@@ -597,7 +597,7 @@ typedef NS_ENUM(NSInteger, UISegmentedControlSelectedMode) {
         {
             NSInteger numberOfStudents = [currentDistanceNumberOfStudent.text integerValue];
             numberOfStudents++;
-            currentDistanceNumberOfStudent.text =[ NSString stringWithFormat:@"%d",numberOfStudents];
+            currentDistanceNumberOfStudent.text =[ NSString stringWithFormat:@"%ld",(long)numberOfStudents];
         }
     }
 }
