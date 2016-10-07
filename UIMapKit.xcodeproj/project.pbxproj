@@ -19,6 +19,8 @@
 		96B994621DA3A2BB00B12586 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B994601DA3A2BB00B12586 /* female.png */; };
 		96B994631DA3A2BB00B12586 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B994611DA3A2BB00B12586 /* male.png */; };
 		96F8415D1DA3E31F001CC085 /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F8415C1DA3E31F001CC085 /* UIView+MKAnnotationView.m */; };
+		96F8416C1DA4C1E7001CC085 /* gomer.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F8416B1DA4C1E7001CC085 /* gomer.png */; };
+		96F8416F1DA4C3BB001CC085 /* MapAnnotationMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F8416E1DA4C3BB001CC085 /* MapAnnotationMeeting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,9 @@
 		96B994611DA3A2BB00B12586 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		96F8415B1DA3E31F001CC085 /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
 		96F8415C1DA3E31F001CC085 /* UIView+MKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MKAnnotationView.m"; sourceTree = "<group>"; };
+		96F8416B1DA4C1E7001CC085 /* gomer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gomer.png; sourceTree = "<group>"; };
+		96F8416D1DA4C3BB001CC085 /* MapAnnotationMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationMeeting.h; sourceTree = "<group>"; };
+		96F8416E1DA4C3BB001CC085 /* MapAnnotationMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationMeeting.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +121,8 @@
 			children = (
 				96B994551DA2540200B12586 /* MapAnnotationStudent.h */,
 				96B994561DA2540200B12586 /* MapAnnotationStudent.m */,
+				96F8416D1DA4C3BB001CC085 /* MapAnnotationMeeting.h */,
+				96F8416E1DA4C3BB001CC085 /* MapAnnotationMeeting.m */,
 			);
 			name = MapAnnotation;
 			path = ..;
@@ -124,6 +131,7 @@
 		96B9945F1DA3A2BB00B12586 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				96F8416B1DA4C1E7001CC085 /* gomer.png */,
 				96B994601DA3A2BB00B12586 /* female.png */,
 				96B994611DA3A2BB00B12586 /* male.png */,
 			);
@@ -202,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F8416C1DA4C1E7001CC085 /* gomer.png in Resources */,
 				965770171D9F942300ACF4EA /* LaunchScreen.storyboard in Resources */,
 				96B994631DA3A2BB00B12586 /* male.png in Resources */,
 				965770141D9F942300ACF4EA /* Assets.xcassets in Resources */,
@@ -220,6 +229,7 @@
 				96F8415D1DA3E31F001CC085 /* UIView+MKAnnotationView.m in Sources */,
 				9657700F1D9F942300ACF4EA /* ViewController.m in Sources */,
 				965C12C41DA3C2410023EBA4 /* InfoStudentPopover.m in Sources */,
+				96F8416F1DA4C3BB001CC085 /* MapAnnotationMeeting.m in Sources */,
 				9657700C1D9F942300ACF4EA /* AppDelegate.m in Sources */,
 				965770091D9F942300ACF4EA /* main.m in Sources */,
 				963F66DD1DA226F1003D2C39 /* Student.m in Sources */,

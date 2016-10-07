@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 @class MKMapView;
 @interface ViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typeMapControl;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+- (IBAction)actionMapType:(UISegmentedControl *)sender;
 
 
 @end
